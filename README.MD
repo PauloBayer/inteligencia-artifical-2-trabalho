@@ -12,3 +12,11 @@ Dicas para o trabalho:
 - Porém, antes disso, é necessário gerar um conjunto de dados para o teste bom em que haja bolas para serem identificadas de raios aleatórios e posições aleatórias. Talvez gerar dois conjuntos/amostras, um com uma bola e um com mais de uma bola;
 - Gerar amostragem de dados com matriz, um mapa de 255 x 255;
 - Adicionar um atributo também de verificar se a borda está cortando um pixel preto. O ideal é que toda a área do círculo identificador esteja preenchido sem nenhuma borda estiver cortando. Isso significa que o círculo completo foi encontrado com perfeição.
+
+---
+
+Baixar as dependências:
+
+```bash
+pip install -r requirements.txt
+```
