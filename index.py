@@ -1,108 +1,166 @@
 from PIL import Image
 import numpy as np
+from gapy import gago, bits2bytes
+import os
+import json
 
-# Fluxo geral:
-# 1. Coletar imagens
-# 2. Pré processamento (redimensionar para ficar mais leve)
+# ----------------------------
+# 1. Funções auxiliares
+# ----------------------------
+
+def load_image(file_path):
+    """Carrega imagem e transforma em array binário"""
+    img = Image.open(file_path).convert('L')
+    img_array = np.array(img)
+    binary_array = np.where(img_array < 128, 1, 0)
+    return binary_array
+
+def loss_function(output, target):
+    error = output - target
+    return (error[0]**2 + error[1]**2 + 2*error[2]**2) / 4
+
+
+# ----------------------------
 # 3. Definir rede neural
-# 4. Definir função de perda
-# 5. Implementar algotritmo de genético (vai ser usado para otimizar os pesos da rede neural)
-# 6. Treinar a rede neural
-
-# ---------- 1. Coletar imagens ----------
-
-file_path = "amostras/dados/images/single/single_0000.png"
-img = Image.open(file_path).convert('L')
-
-img_array = np.array(img)
-binary_array = np.where(img_array < 128, 1, 0)
-
-print(binary_array.shape)
-print(binary_array)
-
-# ---------- 2. Pré processamento (redimensionar para ficar mais leve) ----------
-
-# ---------- 3. Definir rede neural ----------
+# ----------------------------
 
 class NeuralNetwork:
-    def __init__(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size, hidden_sizes, output_size):
         """
         Inicializa a rede neural.
-        input_size: número de neurônios na camada de entrada (tamanho do bloco flatten)
-        hidden_size: número de neurônios na camada oculta
-        output_size: número de neurônios na saída (1 = presença de bola)
+        input_size: número de neurônios na camada de entrada (tamanho da imagem flatten)
+        hidden_sizes: lista com o número de neurônios em cada camada oculta
+        output_size: número de neurônios na saída (x, y, r)
         """
-        # Pesos aleatórios para Entrada -> Oculta
-        self.W1 = np.random.randn(input_size, hidden_size)
-        self.b1 = np.random.randn(hidden_size)
-        
-        # Pesos aleatórios para Oculta -> Saída
-        self.W2 = np.random.randn(hidden_size, output_size)
-        self.b2 = np.random.randn(output_size)
+        self.hidden_sizes = hidden_sizes
+        self.weights = []
+        self.biases = []
+
+        prev_size = input_size
+        for h in hidden_sizes:
+            self.weights.append(np.random.randn(prev_size, h) * 0.01)
+            self.biases.append(np.random.randn(h) * 0.01)
+            prev_size = h
+
+        self.weights.append(np.random.randn(prev_size, output_size) * 0.01)
+        self.biases.append(np.random.randn(output_size) * 0.01)
     
     def sigmoid(self, x):
         """Função de ativação sigmóide"""
+        x = np.clip(x, -500, 500)
         return 1 / (1 + np.exp(-x))
     
     def forward(self, x):
-        """
-        Propagação da entrada pela rede
-        x: vetor de entrada (ex: 64 pixels do bloco)
-        retorna: valor de saída (0 a 1)
-        """
-        # Camada oculta
-        self.z1 = np.dot(x, self.W1) + self.b1
-        self.a1 = self.sigmoid(self.z1)
-        
-        # Camada de saída
-        self.z2 = np.dot(self.a1, self.W2) + self.b2
-        self.a2 = self.sigmoid(self.z2)
-        
-        return self.a2
+        a = x
+        for i in range(len(self.hidden_sizes)):
+            z = np.dot(a, self.weights[i]) + self.biases[i]
+            a = self.sigmoid(z)
+        # camada de saída linear
+        output = np.dot(a, self.weights[-1]) + self.biases[-1]
+        return output
 
     def get_weights(self):
-        """Retorna todos os pesos e biases como um vetor"""
-        return np.concatenate([self.W1.flatten(), self.b1, self.W2.flatten(), self.b2])
-    
-    def set_weights(self, weight_vector):
-        """Atualiza os pesos e biases a partir de um vetor"""
+        """Retorna todos os pesos e biases concatenados em vetor"""
+        vec = []
+        for w, b in zip(self.weights, self.biases):
+            vec.append(w.flatten())
+            vec.append(b)
+        return np.concatenate(vec)
+
+    def set_weights(self, vector):
         idx = 0
-        
-        # W1
-        n_W1 = self.W1.size
-        self.W1 = weight_vector[idx:idx+n_W1].reshape(self.W1.shape)
-        idx += n_W1
-        
-        # b1
-        n_b1 = self.b1.size
-        self.b1 = weight_vector[idx:idx+n_b1]
-        idx += n_b1
-        
-        # W2
-        n_W2 = self.W2.size
-        self.W2 = weight_vector[idx:idx+n_W2].reshape(self.W2.shape)
-        idx += n_W2
-        
-        # b2
-        n_b2 = self.b2.size
-        self.b2 = weight_vector[idx:idx+n_b2]
+        for i in range(len(self.weights)):
+            w_shape = self.weights[i].shape
+            b_shape = self.biases[i].shape
 
-input_size = 255 * 255   # tamanho do bloco 8x8
-hidden_size = 10  # camada oculta com 10 neurônios
-output_size = 1   # saída: 0 ou 1 (bola ou não)
+            n_w = np.prod(w_shape)
+            self.weights[i] = vector[idx:idx+n_w].reshape(w_shape)
+            idx += n_w
 
-nn = NeuralNetwork(input_size, hidden_size, output_size)
+            n_b = np.prod(b_shape)
+            self.biases[i] = vector[idx:idx+n_b]
+            idx += n_b
 
-print("Pesos iniciais:", nn.get_weights())
 
-output = nn.forward(binary_array.flatten())
-print("Output da rede:", output)
+# ----------------------------
+# 3. Configurações da rede
+# ----------------------------
 
-# ---------- 4. Definir função de perda ----------
+input_size = 24 * 24  # imagem 63x63 flatten
+hidden_sizes = [5, 3]  # ex.: duas camadas ocultas, 5 e 3 neurônios
+output_size = 3         # saída: x, y, r
 
-def loss_function(nn, X, Y):
-    return 1
+nn = NeuralNetwork(input_size, hidden_sizes, output_size)
 
-# ---------- 5. Implementar algotritmo de genético (vai ser usado para otimizar os pesos da rede neural) ----------
 
-# ---------- 6. Treinar a rede neural ----------
+# ----------------------------
+# 4. Ler metadados JSON
+# ----------------------------
+
+annotations_path = "amostras/dados/annotations.jsonl"
+with open(annotations_path, 'r') as f:
+    lines = f.readlines()
+
+annotations = [json.loads(line) for line in lines]
+
+# ----------------------------
+# 5. Loop pelas imagens com aprendizado contínuo
+# ----------------------------
+
+# Inicializa população do GA como vazia
+initial_population = []
+
+for ann in annotations:
+    file_path = os.path.join("amostras/dados", ann["file"])
+    binary_array = load_image(file_path)
+
+    # Extrair valores reais da primeira bola (n_bolas=1)
+    circle = ann["circles"][0]
+    x_real, y_real, r_real = circle["cx"], circle["cy"], circle["r"]
+
+    # Normalização 0-1
+    target = np.array([x_real/24, y_real/24, r_real/24])
+
+    # Função fitness para GA
+    def fit_func(bits):
+        weight_vector = bits2bytes(bits, 'int16').astype(np.float32) / 1000.0
+        nn.set_weights(weight_vector)
+        output_pred = nn.forward(binary_array.flatten())
+        # normaliza saída
+        output_pred_norm = output_pred / 24.0
+        loss = loss_function(output_pred_norm, target)
+        return loss
+
+    # Opções do GA
+    gaoptions = {
+        "PopulationSize": 200,
+        "Generations": 50,
+        "InitialPopulation": initial_population,  # usa população da iteração anterior
+        "MutationFcn": 0.1,
+        "EliteCount": 2,
+    }
+
+    num_weights = nn.get_weights().size
+    num_bits = num_weights * 16
+
+    # Executa GA
+    result = gago(fit_func, num_bits, gaoptions)
+
+    print(result)
+
+    # Atualiza os melhores pesos na rede
+    best_bits = result[0]
+    best_weights = bits2bytes(best_bits, 'int16').astype(np.float32) / 1000.0
+    nn.set_weights(best_weights)
+
+    # Salva população final para próxima imagem (se gapy devolver população)
+    if len(result) > 1:
+        initial_population = result[0]
+
+    # Testa a rede
+    output_pred = nn.forward(binary_array.flatten())
+    output_pred_denorm = output_pred
+    print(f"Imagem: {file_path}")
+    print(f"Valores reais: {(x_real, y_real, r_real)}")
+    print(f"Output da rede (denormalizado): {output_pred_denorm}")
+    print("--------")
