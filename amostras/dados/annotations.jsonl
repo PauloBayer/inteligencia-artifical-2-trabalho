@@ -98,103 +98,203 @@
 {"file": "images/single/single_0097.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 228, "cy": 89, "r": 16}]}
 {"file": "images/single/single_0098.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 131, "cy": 199, "r": 25}]}
 {"file": "images/single/single_0099.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 82, "cy": 26, "r": 22}]}
-{"file": "images/multi/multi_0000.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 36, "cy": 200, "r": 35}, {"cx": 53, "cy": 86, "r": 25}, {"cx": 90, "cy": 48, "r": 26}]}
-{"file": "images/multi/multi_0001.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 53, "cy": 84, "r": 30}, {"cx": 163, "cy": 178, "r": 16}, {"cx": 212, "cy": 179, "r": 31}, {"cx": 41, "cy": 152, "r": 18}]}
-{"file": "images/multi/multi_0002.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 80, "cy": 81, "r": 40}, {"cx": 42, "cy": 140, "r": 9}, {"cx": 120, "cy": 184, "r": 35}, {"cx": 237, "cy": 224, "r": 16}, {"cx": 214, "cy": 65, "r": 39}]}
-{"file": "images/multi/multi_0003.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 185, "cy": 208, "r": 11}, {"cx": 77, "cy": 198, "r": 37}, {"cx": 131, "cy": 120, "r": 11}, {"cx": 22, "cy": 187, "r": 18}, {"cx": 162, "cy": 108, "r": 19}]}
-{"file": "images/multi/multi_0004.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 54, "cy": 170, "r": 37}, {"cx": 104, "cy": 82, "r": 32}, {"cx": 231, "cy": 234, "r": 8}]}
-{"file": "images/multi/multi_0005.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 38, "cy": 25, "r": 9}, {"cx": 200, "cy": 63, "r": 35}]}
-{"file": "images/multi/multi_0006.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 97, "cy": 150, "r": 13}, {"cx": 199, "cy": 39, "r": 31}, {"cx": 77, "cy": 84, "r": 14}, {"cx": 52, "cy": 219, "r": 22}]}
-{"file": "images/multi/multi_0007.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 65, "cy": 76, "r": 13}, {"cx": 16, "cy": 168, "r": 12}]}
-{"file": "images/multi/multi_0008.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 80, "cy": 128, "r": 12}, {"cx": 162, "cy": 175, "r": 38}, {"cx": 110, "cy": 67, "r": 27}, {"cx": 183, "cy": 40, "r": 36}, {"cx": 47, "cy": 173, "r": 31}]}
-{"file": "images/multi/multi_0009.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 112, "cy": 40, "r": 12}, {"cx": 214, "cy": 42, "r": 26}, {"cx": 124, "cy": 129, "r": 12}, {"cx": 90, "cy": 217, "r": 29}, {"cx": 22, "cy": 226, "r": 21}]}
-{"file": "images/multi/multi_0010.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 63, "cy": 214, "r": 27}, {"cx": 185, "cy": 114, "r": 32}]}
-{"file": "images/multi/multi_0011.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 184, "cy": 196, "r": 28}, {"cx": 166, "cy": 34, "r": 8}, {"cx": 200, "cy": 72, "r": 17}]}
-{"file": "images/multi/multi_0012.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 71, "cy": 92, "r": 23}, {"cx": 181, "cy": 149, "r": 25}, {"cx": 98, "cy": 226, "r": 11}, {"cx": 45, "cy": 159, "r": 22}, {"cx": 134, "cy": 74, "r": 22}]}
-{"file": "images/multi/multi_0013.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 238, "cy": 182, "r": 15}, {"cx": 186, "cy": 212, "r": 35}, {"cx": 216, "cy": 26, "r": 11}]}
-{"file": "images/multi/multi_0014.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 98, "cy": 56, "r": 27}, {"cx": 201, "cy": 86, "r": 14}, {"cx": 220, "cy": 49, "r": 18}]}
-{"file": "images/multi/multi_0015.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 145, "cy": 67, "r": 38}, {"cx": 78, "cy": 145, "r": 13}, {"cx": 29, "cy": 170, "r": 25}, {"cx": 55, "cy": 50, "r": 9}, {"cx": 130, "cy": 163, "r": 27}]}
-{"file": "images/multi/multi_0016.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 198, "cy": 88, "r": 20}, {"cx": 128, "cy": 168, "r": 40}, {"cx": 33, "cy": 126, "r": 25}, {"cx": 71, "cy": 159, "r": 15}, {"cx": 27, "cy": 18, "r": 17}]}
-{"file": "images/multi/multi_0017.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 131, "cy": 197, "r": 38}, {"cx": 32, "cy": 205, "r": 11}, {"cx": 23, "cy": 105, "r": 11}]}
-{"file": "images/multi/multi_0018.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 49, "cy": 193, "r": 30}, {"cx": 183, "cy": 201, "r": 35}, {"cx": 235, "cy": 87, "r": 15}, {"cx": 172, "cy": 58, "r": 33}, {"cx": 75, "cy": 29, "r": 16}]}
-{"file": "images/multi/multi_0019.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 122, "cy": 56, "r": 22}, {"cx": 98, "cy": 128, "r": 19}]}
-{"file": "images/multi/multi_0020.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 94, "cy": 114, "r": 32}, {"cx": 59, "cy": 167, "r": 20}, {"cx": 157, "cy": 201, "r": 39}]}
-{"file": "images/multi/multi_0021.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 183, "cy": 91, "r": 23}, {"cx": 134, "cy": 223, "r": 23}, {"cx": 125, "cy": 155, "r": 36}, {"cx": 196, "cy": 139, "r": 14}, {"cx": 77, "cy": 51, "r": 10}]}
-{"file": "images/multi/multi_0022.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 56, "cy": 150, "r": 9}, {"cx": 128, "cy": 197, "r": 30}, {"cx": 154, "cy": 46, "r": 28}, {"cx": 172, "cy": 143, "r": 28}]}
-{"file": "images/multi/multi_0023.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 216, "cy": 173, "r": 25}, {"cx": 233, "cy": 233, "r": 12}]}
-{"file": "images/multi/multi_0024.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 110, "cy": 145, "r": 34}, {"cx": 187, "cy": 232, "r": 22}]}
-{"file": "images/multi/multi_0025.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 207, "cy": 54, "r": 38}, {"cx": 176, "cy": 147, "r": 16}, {"cx": 31, "cy": 132, "r": 9}, {"cx": 61, "cy": 62, "r": 28}, {"cx": 142, "cy": 13, "r": 12}]}
-{"file": "images/multi/multi_0026.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 120, "cy": 164, "r": 23}, {"cx": 174, "cy": 181, "r": 25}, {"cx": 72, "cy": 148, "r": 24}, {"cx": 227, "cy": 207, "r": 12}]}
-{"file": "images/multi/multi_0027.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 55, "cy": 169, "r": 33}, {"cx": 124, "cy": 164, "r": 10}]}
-{"file": "images/multi/multi_0028.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 217, "cy": 185, "r": 21}, {"cx": 166, "cy": 179, "r": 14}, {"cx": 179, "cy": 213, "r": 19}, {"cx": 193, "cy": 97, "r": 16}]}
-{"file": "images/multi/multi_0029.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 86, "cy": 52, "r": 18}, {"cx": 137, "cy": 116, "r": 38}, {"cx": 65, "cy": 137, "r": 32}, {"cx": 210, "cy": 113, "r": 35}]}
-{"file": "images/multi/multi_0030.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 205, "cy": 211, "r": 16}, {"cx": 53, "cy": 53, "r": 29}]}
-{"file": "images/multi/multi_0031.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 33, "cy": 164, "r": 27}, {"cx": 27, "cy": 44, "r": 25}, {"cx": 174, "cy": 196, "r": 22}]}
-{"file": "images/multi/multi_0032.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 230, "cy": 118, "r": 17}, {"cx": 114, "cy": 20, "r": 18}, {"cx": 130, "cy": 219, "r": 17}]}
-{"file": "images/multi/multi_0033.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 135, "cy": 53, "r": 33}, {"cx": 234, "cy": 29, "r": 20}, {"cx": 166, "cy": 243, "r": 11}, {"cx": 204, "cy": 198, "r": 30}]}
-{"file": "images/multi/multi_0034.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 69, "cy": 117, "r": 16}, {"cx": 209, "cy": 191, "r": 12}]}
-{"file": "images/multi/multi_0035.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 17, "cy": 220, "r": 14}, {"cx": 162, "cy": 217, "r": 17}, {"cx": 10, "cy": 10, "r": 9}, {"cx": 223, "cy": 188, "r": 27}, {"cx": 81, "cy": 89, "r": 39}]}
-{"file": "images/multi/multi_0036.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 28, "cy": 165, "r": 16}, {"cx": 215, "cy": 207, "r": 34}, {"cx": 30, "cy": 118, "r": 22}, {"cx": 39, "cy": 42, "r": 14}, {"cx": 128, "cy": 135, "r": 31}]}
-{"file": "images/multi/multi_0037.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 153, "cy": 43, "r": 26}, {"cx": 17, "cy": 75, "r": 14}, {"cx": 176, "cy": 132, "r": 11}, {"cx": 35, "cy": 38, "r": 24}]}
-{"file": "images/multi/multi_0038.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 18, "cy": 60, "r": 8}, {"cx": 120, "cy": 165, "r": 37}, {"cx": 57, "cy": 100, "r": 21}, {"cx": 190, "cy": 53, "r": 11}]}
-{"file": "images/multi/multi_0039.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 143, "cy": 120, "r": 40}, {"cx": 52, "cy": 74, "r": 22}, {"cx": 80, "cy": 156, "r": 31}]}
-{"file": "images/multi/multi_0040.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 66, "cy": 65, "r": 39}, {"cx": 129, "cy": 167, "r": 23}, {"cx": 215, "cy": 121, "r": 21}]}
-{"file": "images/multi/multi_0041.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 237, "cy": 42, "r": 11}, {"cx": 88, "cy": 55, "r": 39}]}
-{"file": "images/multi/multi_0042.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 113, "cy": 184, "r": 28}, {"cx": 112, "cy": 66, "r": 40}, {"cx": 199, "cy": 67, "r": 21}]}
-{"file": "images/multi/multi_0043.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 147, "cy": 90, "r": 27}, {"cx": 44, "cy": 91, "r": 38}, {"cx": 64, "cy": 34, "r": 12}, {"cx": 97, "cy": 140, "r": 26}, {"cx": 138, "cy": 201, "r": 32}]}
-{"file": "images/multi/multi_0044.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 190, "cy": 128, "r": 38}, {"cx": 131, "cy": 83, "r": 32}]}
-{"file": "images/multi/multi_0045.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 86, "cy": 131, "r": 16}, {"cx": 36, "cy": 22, "r": 9}, {"cx": 214, "cy": 207, "r": 10}, {"cx": 141, "cy": 90, "r": 17}, {"cx": 59, "cy": 175, "r": 24}]}
-{"file": "images/multi/multi_0046.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 184, "cy": 222, "r": 10}, {"cx": 112, "cy": 205, "r": 8}, {"cx": 196, "cy": 111, "r": 31}]}
-{"file": "images/multi/multi_0047.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 60, "cy": 77, "r": 31}, {"cx": 161, "cy": 51, "r": 27}, {"cx": 99, "cy": 127, "r": 24}]}
-{"file": "images/multi/multi_0048.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 243, "cy": 115, "r": 10}, {"cx": 113, "cy": 91, "r": 33}, {"cx": 176, "cy": 105, "r": 31}, {"cx": 169, "cy": 57, "r": 8}, {"cx": 199, "cy": 217, "r": 21}]}
-{"file": "images/multi/multi_0049.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 137, "cy": 74, "r": 39}, {"cx": 183, "cy": 218, "r": 35}, {"cx": 56, "cy": 128, "r": 29}, {"cx": 199, "cy": 104, "r": 22}, {"cx": 35, "cy": 200, "r": 18}]}
-{"file": "images/multi/multi_0050.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 111, "cy": 122, "r": 9}, {"cx": 215, "cy": 54, "r": 23}, {"cx": 57, "cy": 71, "r": 18}, {"cx": 59, "cy": 125, "r": 17}, {"cx": 142, "cy": 166, "r": 40}]}
-{"file": "images/multi/multi_0051.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 28, "cy": 72, "r": 8}, {"cx": 203, "cy": 204, "r": 16}, {"cx": 152, "cy": 137, "r": 36}]}
-{"file": "images/multi/multi_0052.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 163, "cy": 190, "r": 21}, {"cx": 149, "cy": 43, "r": 33}, {"cx": 101, "cy": 174, "r": 31}, {"cx": 205, "cy": 94, "r": 25}]}
-{"file": "images/multi/multi_0053.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 96, "cy": 124, "r": 35}, {"cx": 182, "cy": 166, "r": 25}, {"cx": 213, "cy": 86, "r": 22}, {"cx": 51, "cy": 197, "r": 27}, {"cx": 46, "cy": 29, "r": 25}]}
-{"file": "images/multi/multi_0054.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 200, "cy": 150, "r": 40}, {"cx": 105, "cy": 63, "r": 28}, {"cx": 72, "cy": 19, "r": 14}]}
-{"file": "images/multi/multi_0055.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 161, "cy": 118, "r": 38}, {"cx": 86, "cy": 51, "r": 21}, {"cx": 140, "cy": 28, "r": 27}, {"cx": 220, "cy": 185, "r": 31}]}
-{"file": "images/multi/multi_0056.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 123, "cy": 215, "r": 37}, {"cx": 173, "cy": 82, "r": 24}, {"cx": 204, "cy": 38, "r": 23}, {"cx": 221, "cy": 158, "r": 26}]}
-{"file": "images/multi/multi_0057.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 58, "cy": 212, "r": 40}, {"cx": 217, "cy": 175, "r": 32}, {"cx": 97, "cy": 29, "r": 29}]}
-{"file": "images/multi/multi_0058.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 26, "cy": 129, "r": 17}, {"cx": 215, "cy": 125, "r": 33}]}
-{"file": "images/multi/multi_0059.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 190, "cy": 121, "r": 40}, {"cx": 232, "cy": 70, "r": 18}, {"cx": 36, "cy": 190, "r": 21}, {"cx": 45, "cy": 72, "r": 29}, {"cx": 135, "cy": 188, "r": 26}]}
-{"file": "images/multi/multi_0060.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 117, "cy": 185, "r": 38}, {"cx": 23, "cy": 27, "r": 15}, {"cx": 224, "cy": 30, "r": 20}]}
-{"file": "images/multi/multi_0061.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 228, "cy": 168, "r": 11}, {"cx": 167, "cy": 157, "r": 33}, {"cx": 34, "cy": 196, "r": 33}]}
-{"file": "images/multi/multi_0062.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 107, "cy": 184, "r": 32}, {"cx": 30, "cy": 215, "r": 20}, {"cx": 37, "cy": 154, "r": 15}, {"cx": 208, "cy": 114, "r": 15}]}
-{"file": "images/multi/multi_0063.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 130, "cy": 85, "r": 39}, {"cx": 108, "cy": 165, "r": 33}]}
-{"file": "images/multi/multi_0064.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 161, "cy": 78, "r": 28}, {"cx": 108, "cy": 206, "r": 15}, {"cx": 45, "cy": 79, "r": 21}, {"cx": 205, "cy": 201, "r": 26}, {"cx": 168, "cy": 33, "r": 14}]}
-{"file": "images/multi/multi_0065.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 116, "cy": 174, "r": 19}, {"cx": 192, "cy": 134, "r": 22}, {"cx": 39, "cy": 144, "r": 12}, {"cx": 240, "cy": 208, "r": 14}]}
-{"file": "images/multi/multi_0066.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 145, "cy": 43, "r": 32}, {"cx": 126, "cy": 216, "r": 20}, {"cx": 126, "cy": 92, "r": 15}, {"cx": 35, "cy": 96, "r": 12}]}
-{"file": "images/multi/multi_0067.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 92, "cy": 57, "r": 10}, {"cx": 29, "cy": 87, "r": 26}]}
-{"file": "images/multi/multi_0068.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 151, "cy": 194, "r": 39}, {"cx": 116, "cy": 110, "r": 19}, {"cx": 169, "cy": 77, "r": 40}]}
-{"file": "images/multi/multi_0069.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 158, "cy": 32, "r": 28}, {"cx": 205, "cy": 70, "r": 17}, {"cx": 88, "cy": 56, "r": 17}, {"cx": 92, "cy": 213, "r": 13}]}
-{"file": "images/multi/multi_0070.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 30, "cy": 141, "r": 17}, {"cx": 192, "cy": 146, "r": 16}]}
-{"file": "images/multi/multi_0071.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 115, "cy": 199, "r": 28}, {"cx": 221, "cy": 230, "r": 23}, {"cx": 162, "cy": 78, "r": 27}, {"cx": 191, "cy": 120, "r": 16}, {"cx": 52, "cy": 141, "r": 14}]}
-{"file": "images/multi/multi_0072.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 110, "cy": 163, "r": 11}, {"cx": 227, "cy": 188, "r": 18}, {"cx": 217, "cy": 113, "r": 24}]}
-{"file": "images/multi/multi_0073.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 231, "cy": 236, "r": 9}, {"cx": 51, "cy": 88, "r": 32}]}
-{"file": "images/multi/multi_0074.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 67, "cy": 144, "r": 9}, {"cx": 241, "cy": 116, "r": 10}]}
-{"file": "images/multi/multi_0075.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 186, "cy": 89, "r": 25}, {"cx": 21, "cy": 210, "r": 9}, {"cx": 117, "cy": 70, "r": 31}]}
-{"file": "images/multi/multi_0076.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 125, "cy": 104, "r": 17}, {"cx": 108, "cy": 49, "r": 15}, {"cx": 77, "cy": 34, "r": 8}, {"cx": 204, "cy": 55, "r": 21}, {"cx": 34, "cy": 129, "r": 8}]}
-{"file": "images/multi/multi_0077.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 30, "cy": 92, "r": 24}, {"cx": 112, "cy": 138, "r": 21}, {"cx": 78, "cy": 71, "r": 25}]}
-{"file": "images/multi/multi_0078.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 75, "cy": 210, "r": 27}, {"cx": 203, "cy": 165, "r": 23}, {"cx": 33, "cy": 126, "r": 23}]}
-{"file": "images/multi/multi_0079.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 166, "cy": 71, "r": 36}, {"cx": 151, "cy": 22, "r": 12}, {"cx": 48, "cy": 22, "r": 18}]}
-{"file": "images/multi/multi_0080.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 12, "cy": 229, "r": 10}, {"cx": 199, "cy": 21, "r": 14}, {"cx": 38, "cy": 174, "r": 13}, {"cx": 122, "cy": 76, "r": 28}, {"cx": 165, "cy": 197, "r": 27}]}
-{"file": "images/multi/multi_0081.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 75, "cy": 211, "r": 8}, {"cx": 151, "cy": 118, "r": 25}, {"cx": 218, "cy": 190, "r": 13}]}
-{"file": "images/multi/multi_0082.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 89, "cy": 82, "r": 36}, {"cx": 220, "cy": 140, "r": 16}, {"cx": 214, "cy": 52, "r": 38}, {"cx": 178, "cy": 195, "r": 19}, {"cx": 85, "cy": 138, "r": 12}]}
-{"file": "images/multi/multi_0083.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 150, "cy": 80, "r": 11}, {"cx": 130, "cy": 108, "r": 15}, {"cx": 91, "cy": 191, "r": 28}, {"cx": 212, "cy": 17, "r": 10}, {"cx": 175, "cy": 47, "r": 8}]}
-{"file": "images/multi/multi_0084.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 194, "cy": 167, "r": 31}, {"cx": 45, "cy": 212, "r": 18}, {"cx": 149, "cy": 66, "r": 12}, {"cx": 191, "cy": 45, "r": 12}]}
-{"file": "images/multi/multi_0085.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 41, "cy": 63, "r": 30}, {"cx": 128, "cy": 56, "r": 34}, {"cx": 40, "cy": 137, "r": 38}, {"cx": 141, "cy": 142, "r": 40}]}
-{"file": "images/multi/multi_0086.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 144, "cy": 219, "r": 12}, {"cx": 216, "cy": 107, "r": 11}, {"cx": 58, "cy": 152, "r": 25}]}
-{"file": "images/multi/multi_0087.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 176, "cy": 28, "r": 17}, {"cx": 92, "cy": 163, "r": 17}]}
-{"file": "images/multi/multi_0088.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 70, "cy": 38, "r": 35}, {"cx": 150, "cy": 46, "r": 9}, {"cx": 205, "cy": 211, "r": 15}, {"cx": 81, "cy": 149, "r": 35}, {"cx": 108, "cy": 225, "r": 12}]}
-{"file": "images/multi/multi_0089.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 41, "cy": 45, "r": 39}, {"cx": 101, "cy": 131, "r": 34}, {"cx": 108, "cy": 220, "r": 22}, {"cx": 190, "cy": 218, "r": 11}]}
-{"file": "images/multi/multi_0090.png", "split": "multi", "size": 255, "n_bolas": 4, "circles": [{"cx": 55, "cy": 166, "r": 21}, {"cx": 54, "cy": 98, "r": 23}, {"cx": 215, "cy": 203, "r": 36}, {"cx": 108, "cy": 131, "r": 20}]}
-{"file": "images/multi/multi_0091.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 156, "cy": 171, "r": 32}, {"cx": 116, "cy": 47, "r": 26}]}
-{"file": "images/multi/multi_0092.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 163, "cy": 193, "r": 37}, {"cx": 11, "cy": 58, "r": 11}, {"cx": 178, "cy": 118, "r": 22}, {"cx": 58, "cy": 242, "r": 8}, {"cx": 106, "cy": 152, "r": 28}]}
-{"file": "images/multi/multi_0093.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 151, "cy": 142, "r": 19}, {"cx": 104, "cy": 109, "r": 27}, {"cx": 56, "cy": 89, "r": 10}]}
-{"file": "images/multi/multi_0094.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 104, "cy": 185, "r": 19}, {"cx": 88, "cy": 49, "r": 12}, {"cx": 167, "cy": 28, "r": 18}]}
-{"file": "images/multi/multi_0095.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 236, "cy": 181, "r": 8}, {"cx": 60, "cy": 38, "r": 16}, {"cx": 180, "cy": 145, "r": 23}]}
-{"file": "images/multi/multi_0096.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 79, "cy": 122, "r": 19}, {"cx": 235, "cy": 56, "r": 14}, {"cx": 132, "cy": 34, "r": 23}, {"cx": 22, "cy": 13, "r": 12}, {"cx": 41, "cy": 223, "r": 23}]}
-{"file": "images/multi/multi_0097.png", "split": "multi", "size": 255, "n_bolas": 2, "circles": [{"cx": 161, "cy": 126, "r": 29}, {"cx": 57, "cy": 79, "r": 37}]}
-{"file": "images/multi/multi_0098.png", "split": "multi", "size": 255, "n_bolas": 3, "circles": [{"cx": 80, "cy": 84, "r": 12}, {"cx": 90, "cy": 198, "r": 33}, {"cx": 203, "cy": 52, "r": 33}]}
-{"file": "images/multi/multi_0099.png", "split": "multi", "size": 255, "n_bolas": 5, "circles": [{"cx": 223, "cy": 98, "r": 28}, {"cx": 143, "cy": 51, "r": 39}, {"cx": 50, "cy": 221, "r": 21}, {"cx": 66, "cy": 139, "r": 18}, {"cx": 172, "cy": 149, "r": 35}]}
+{"file": "images/single/single_0100.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 197, "cy": 22, "r": 20}]}
+{"file": "images/single/single_0101.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 135, "cy": 62, "r": 37}]}
+{"file": "images/single/single_0102.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 139, "cy": 86, "r": 17}]}
+{"file": "images/single/single_0103.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 166, "cy": 167, "r": 11}]}
+{"file": "images/single/single_0104.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 76, "cy": 67, "r": 11}]}
+{"file": "images/single/single_0105.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 172, "cy": 172, "r": 29}]}
+{"file": "images/single/single_0106.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 175, "cy": 95, "r": 38}]}
+{"file": "images/single/single_0107.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 154, "cy": 224, "r": 11}]}
+{"file": "images/single/single_0108.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 80, "cy": 81, "r": 40}]}
+{"file": "images/single/single_0109.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 42, "cy": 140, "r": 9}]}
+{"file": "images/single/single_0110.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 101, "cy": 88, "r": 26}]}
+{"file": "images/single/single_0111.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 120, "cy": 184, "r": 35}]}
+{"file": "images/single/single_0112.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 95, "cy": 74, "r": 39}]}
+{"file": "images/single/single_0113.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 151, "cy": 90, "r": 39}]}
+{"file": "images/single/single_0114.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 130, "cy": 208, "r": 28}]}
+{"file": "images/single/single_0115.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 237, "cy": 224, "r": 16}]}
+{"file": "images/single/single_0116.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 50, "cy": 135, "r": 13}]}
+{"file": "images/single/single_0117.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 79, "cy": 112, "r": 9}]}
+{"file": "images/single/single_0118.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 214, "cy": 65, "r": 39}]}
+{"file": "images/single/single_0119.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 53, "cy": 172, "r": 37}]}
+{"file": "images/single/single_0120.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 199, "cy": 76, "r": 35}]}
+{"file": "images/single/single_0121.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 57, "cy": 130, "r": 37}]}
+{"file": "images/single/single_0122.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 89, "cy": 27, "r": 23}]}
+{"file": "images/single/single_0123.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 96, "cy": 158, "r": 33}]}
+{"file": "images/single/single_0124.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 100, "cy": 209, "r": 21}]}
+{"file": "images/single/single_0125.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 182, "cy": 185, "r": 11}]}
+{"file": "images/single/single_0126.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 76, "cy": 21, "r": 20}]}
+{"file": "images/single/single_0127.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 207, "cy": 81, "r": 38}]}
+{"file": "images/single/single_0128.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 38, "cy": 25, "r": 9}]}
+{"file": "images/single/single_0129.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 200, "cy": 63, "r": 35}]}
+{"file": "images/single/single_0130.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 66, "cy": 102, "r": 32}]}
+{"file": "images/single/single_0131.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 171, "cy": 202, "r": 27}]}
+{"file": "images/single/single_0132.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 55, "cy": 75, "r": 9}]}
+{"file": "images/single/single_0133.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 236, "cy": 188, "r": 18}]}
+{"file": "images/single/single_0134.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 230, "cy": 127, "r": 18}]}
+{"file": "images/single/single_0135.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 113, "cy": 53, "r": 24}]}
+{"file": "images/single/single_0136.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 40, "cy": 69, "r": 38}]}
+{"file": "images/single/single_0137.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 77, "cy": 44, "r": 15}]}
+{"file": "images/single/single_0138.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 169, "cy": 239, "r": 8}]}
+{"file": "images/single/single_0139.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 80, "cy": 128, "r": 12}]}
+{"file": "images/single/single_0140.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 162, "cy": 175, "r": 38}]}
+{"file": "images/single/single_0141.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 110, "cy": 67, "r": 27}]}
+{"file": "images/single/single_0142.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 183, "cy": 40, "r": 36}]}
+{"file": "images/single/single_0143.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 47, "cy": 173, "r": 31}]}
+{"file": "images/single/single_0144.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 59, "cy": 115, "r": 35}]}
+{"file": "images/single/single_0145.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 143, "cy": 226, "r": 12}]}
+{"file": "images/single/single_0146.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 103, "cy": 238, "r": 10}]}
+{"file": "images/single/single_0147.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 46, "cy": 124, "r": 17}]}
+{"file": "images/single/single_0148.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 161, "cy": 88, "r": 24}]}
+{"file": "images/single/single_0149.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 131, "cy": 89, "r": 39}]}
+{"file": "images/single/single_0150.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 202, "cy": 127, "r": 39}]}
+{"file": "images/single/single_0151.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 150, "cy": 140, "r": 8}]}
+{"file": "images/single/single_0152.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 158, "cy": 206, "r": 12}]}
+{"file": "images/single/single_0153.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 179, "cy": 43, "r": 11}]}
+{"file": "images/single/single_0154.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 112, "cy": 33, "r": 32}]}
+{"file": "images/single/single_0155.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 68, "cy": 144, "r": 39}]}
+{"file": "images/single/single_0156.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 226, "cy": 182, "r": 13}]}
+{"file": "images/single/single_0157.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 114, "cy": 121, "r": 34}]}
+{"file": "images/single/single_0158.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 184, "cy": 196, "r": 28}]}
+{"file": "images/single/single_0159.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 166, "cy": 34, "r": 8}]}
+{"file": "images/single/single_0160.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 200, "cy": 72, "r": 17}]}
+{"file": "images/single/single_0161.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 120, "cy": 77, "r": 34}]}
+{"file": "images/single/single_0162.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 134, "cy": 185, "r": 19}]}
+{"file": "images/single/single_0163.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 214, "cy": 201, "r": 27}]}
+{"file": "images/single/single_0164.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 147, "cy": 87, "r": 32}]}
+{"file": "images/single/single_0165.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 46, "cy": 100, "r": 21}]}
+{"file": "images/single/single_0166.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 114, "cy": 58, "r": 38}]}
+{"file": "images/single/single_0167.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 218, "cy": 199, "r": 29}]}
+{"file": "images/single/single_0168.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 117, "cy": 134, "r": 17}]}
+{"file": "images/single/single_0169.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 75, "cy": 68, "r": 16}]}
+{"file": "images/single/single_0170.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 170, "cy": 187, "r": 40}]}
+{"file": "images/single/single_0171.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 213, "cy": 53, "r": 34}]}
+{"file": "images/single/single_0172.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 49, "cy": 123, "r": 37}]}
+{"file": "images/single/single_0173.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 98, "cy": 56, "r": 27}]}
+{"file": "images/single/single_0174.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 201, "cy": 86, "r": 14}]}
+{"file": "images/single/single_0175.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 220, "cy": 49, "r": 18}]}
+{"file": "images/single/single_0176.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 202, "cy": 145, "r": 38}]}
+{"file": "images/single/single_0177.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 48, "cy": 78, "r": 13}]}
+{"file": "images/single/single_0178.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 57, "cy": 118, "r": 27}]}
+{"file": "images/single/single_0179.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 136, "cy": 15, "r": 11}]}
+{"file": "images/single/single_0180.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 41, "cy": 68, "r": 31}]}
+{"file": "images/single/single_0181.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 203, "cy": 25, "r": 13}]}
+{"file": "images/single/single_0182.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 146, "cy": 130, "r": 22}]}
+{"file": "images/single/single_0183.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 186, "cy": 106, "r": 30}]}
+{"file": "images/single/single_0184.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 93, "cy": 217, "r": 35}]}
+{"file": "images/single/single_0185.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 176, "cy": 205, "r": 24}]}
+{"file": "images/single/single_0186.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 193, "cy": 134, "r": 34}]}
+{"file": "images/single/single_0187.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 125, "cy": 52, "r": 9}]}
+{"file": "images/single/single_0188.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 79, "cy": 78, "r": 37}]}
+{"file": "images/single/single_0189.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 159, "cy": 143, "r": 16}]}
+{"file": "images/single/single_0190.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 112, "cy": 88, "r": 39}]}
+{"file": "images/single/single_0191.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 10, "cy": 97, "r": 9}]}
+{"file": "images/single/single_0192.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 131, "cy": 197, "r": 38}]}
+{"file": "images/single/single_0193.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 32, "cy": 205, "r": 11}]}
+{"file": "images/single/single_0194.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 23, "cy": 105, "r": 11}]}
+{"file": "images/single/single_0195.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 161, "cy": 55, "r": 38}]}
+{"file": "images/single/single_0196.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 191, "cy": 183, "r": 35}]}
+{"file": "images/single/single_0197.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 80, "cy": 214, "r": 37}]}
+{"file": "images/single/single_0198.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 193, "cy": 144, "r": 18}]}
+{"file": "images/single/single_0199.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 151, "cy": 154, "r": 33}]}
+{"file": "images/single/single_0200.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 183, "cy": 175, "r": 28}]}
+{"file": "images/single/single_0201.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 202, "cy": 135, "r": 12}]}
+{"file": "images/single/single_0202.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 130, "cy": 229, "r": 18}]}
+{"file": "images/single/single_0203.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 188, "cy": 120, "r": 36}]}
+{"file": "images/single/single_0204.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 105, "cy": 162, "r": 33}]}
+{"file": "images/single/single_0205.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 78, "cy": 81, "r": 29}]}
+{"file": "images/single/single_0206.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 42, "cy": 111, "r": 10}]}
+{"file": "images/single/single_0207.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 57, "cy": 110, "r": 23}]}
+{"file": "images/single/single_0208.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 73, "cy": 94, "r": 27}]}
+{"file": "images/single/single_0209.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 128, "cy": 98, "r": 20}]}
+{"file": "images/single/single_0210.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 94, "cy": 114, "r": 32}]}
+{"file": "images/single/single_0211.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 59, "cy": 167, "r": 20}]}
+{"file": "images/single/single_0212.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 81, "cy": 193, "r": 15}]}
+{"file": "images/single/single_0213.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 157, "cy": 201, "r": 39}]}
+{"file": "images/single/single_0214.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 124, "cy": 176, "r": 36}]}
+{"file": "images/single/single_0215.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 118, "cy": 135, "r": 18}]}
+{"file": "images/single/single_0216.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 189, "cy": 125, "r": 39}]}
+{"file": "images/single/single_0217.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 68, "cy": 187, "r": 29}]}
+{"file": "images/single/single_0218.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 134, "cy": 181, "r": 26}]}
+{"file": "images/single/single_0219.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 42, "cy": 85, "r": 28}]}
+{"file": "images/single/single_0220.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 181, "cy": 21, "r": 13}]}
+{"file": "images/single/single_0221.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 149, "cy": 171, "r": 14}]}
+{"file": "images/single/single_0222.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 202, "cy": 214, "r": 24}]}
+{"file": "images/single/single_0223.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 232, "cy": 153, "r": 12}]}
+{"file": "images/single/single_0224.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 46, "cy": 151, "r": 28}]}
+{"file": "images/single/single_0225.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 143, "cy": 47, "r": 31}]}
+{"file": "images/single/single_0226.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 216, "cy": 173, "r": 25}]}
+{"file": "images/single/single_0227.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 233, "cy": 233, "r": 12}]}
+{"file": "images/single/single_0228.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 196, "cy": 106, "r": 13}]}
+{"file": "images/single/single_0229.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 116, "cy": 184, "r": 27}]}
+{"file": "images/single/single_0230.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 179, "cy": 202, "r": 40}]}
+{"file": "images/single/single_0231.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 54, "cy": 83, "r": 39}]}
+{"file": "images/single/single_0232.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 144, "cy": 40, "r": 31}]}
+{"file": "images/single/single_0233.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 132, "cy": 154, "r": 11}]}
+{"file": "images/single/single_0234.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 52, "cy": 42, "r": 13}]}
+{"file": "images/single/single_0235.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 27, "cy": 142, "r": 26}]}
+{"file": "images/single/single_0236.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 120, "cy": 164, "r": 23}]}
+{"file": "images/single/single_0237.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 174, "cy": 181, "r": 25}]}
+{"file": "images/single/single_0238.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 181, "cy": 130, "r": 38}]}
+{"file": "images/single/single_0239.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 72, "cy": 148, "r": 24}]}
+{"file": "images/single/single_0240.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 227, "cy": 207, "r": 12}]}
+{"file": "images/single/single_0241.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 194, "cy": 38, "r": 11}]}
+{"file": "images/single/single_0242.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 47, "cy": 125, "r": 31}]}
+{"file": "images/single/single_0243.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 172, "cy": 111, "r": 29}]}
+{"file": "images/single/single_0244.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 176, "cy": 75, "r": 38}]}
+{"file": "images/single/single_0245.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 172, "cy": 95, "r": 30}]}
+{"file": "images/single/single_0246.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 203, "cy": 188, "r": 32}]}
+{"file": "images/single/single_0247.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 152, "cy": 84, "r": 33}]}
+{"file": "images/single/single_0248.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 102, "cy": 133, "r": 34}]}
+{"file": "images/single/single_0249.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 86, "cy": 52, "r": 18}]}
+{"file": "images/single/single_0250.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 65, "cy": 54, "r": 39}]}
+{"file": "images/single/single_0251.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 137, "cy": 116, "r": 38}]}
+{"file": "images/single/single_0252.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 105, "cy": 56, "r": 32}]}
+{"file": "images/single/single_0253.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 65, "cy": 137, "r": 32}]}
+{"file": "images/single/single_0254.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 204, "cy": 102, "r": 39}]}
+{"file": "images/single/single_0255.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 148, "cy": 123, "r": 33}]}
+{"file": "images/single/single_0256.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 98, "cy": 162, "r": 12}]}
+{"file": "images/single/single_0257.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 40, "cy": 165, "r": 40}]}
+{"file": "images/single/single_0258.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 210, "cy": 113, "r": 35}]}
+{"file": "images/single/single_0259.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 74, "cy": 209, "r": 11}]}
+{"file": "images/single/single_0260.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 152, "cy": 58, "r": 36}]}
+{"file": "images/single/single_0261.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 122, "cy": 147, "r": 12}]}
+{"file": "images/single/single_0262.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 171, "cy": 138, "r": 9}]}
+{"file": "images/single/single_0263.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 30, "cy": 116, "r": 8}]}
+{"file": "images/single/single_0264.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 190, "cy": 114, "r": 31}]}
+{"file": "images/single/single_0265.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 230, "cy": 118, "r": 17}]}
+{"file": "images/single/single_0266.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 114, "cy": 20, "r": 18}]}
+{"file": "images/single/single_0267.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 130, "cy": 219, "r": 17}]}
+{"file": "images/single/single_0268.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 181, "cy": 136, "r": 32}]}
+{"file": "images/single/single_0269.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 102, "cy": 243, "r": 11}]}
+{"file": "images/single/single_0270.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 217, "cy": 171, "r": 9}]}
+{"file": "images/single/single_0271.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 188, "cy": 201, "r": 17}]}
+{"file": "images/single/single_0272.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 34, "cy": 166, "r": 9}]}
+{"file": "images/single/single_0273.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 44, "cy": 156, "r": 40}]}
+{"file": "images/single/single_0274.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 162, "cy": 155, "r": 12}]}
+{"file": "images/single/single_0275.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 169, "cy": 220, "r": 10}]}
+{"file": "images/single/single_0276.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 41, "cy": 81, "r": 36}]}
+{"file": "images/single/single_0277.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 116, "cy": 47, "r": 15}]}
+{"file": "images/single/single_0278.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 178, "cy": 183, "r": 36}]}
+{"file": "images/single/single_0279.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 17, "cy": 220, "r": 14}]}
+{"file": "images/single/single_0280.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 162, "cy": 217, "r": 17}]}
+{"file": "images/single/single_0281.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 10, "cy": 10, "r": 9}]}
+{"file": "images/single/single_0282.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 24, "cy": 200, "r": 13}]}
+{"file": "images/single/single_0283.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 223, "cy": 188, "r": 27}]}
+{"file": "images/single/single_0284.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 81, "cy": 89, "r": 39}]}
+{"file": "images/single/single_0285.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 80, "cy": 46, "r": 36}]}
+{"file": "images/single/single_0286.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 186, "cy": 218, "r": 30}]}
+{"file": "images/single/single_0287.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 59, "cy": 176, "r": 38}]}
+{"file": "images/single/single_0288.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 164, "cy": 186, "r": 35}]}
+{"file": "images/single/single_0289.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 117, "cy": 42, "r": 35}]}
+{"file": "images/single/single_0290.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 65, "cy": 46, "r": 23}]}
+{"file": "images/single/single_0291.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 173, "cy": 128, "r": 12}]}
+{"file": "images/single/single_0292.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 177, "cy": 137, "r": 25}]}
+{"file": "images/single/single_0293.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 45, "cy": 197, "r": 28}]}
+{"file": "images/single/single_0294.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 54, "cy": 193, "r": 22}]}
+{"file": "images/single/single_0295.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 42, "cy": 68, "r": 32}]}
+{"file": "images/single/single_0296.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 72, "cy": 31, "r": 8}]}
+{"file": "images/single/single_0297.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 131, "cy": 220, "r": 31}]}
+{"file": "images/single/single_0298.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 148, "cy": 129, "r": 32}]}
+{"file": "images/single/single_0299.png", "split": "single", "size": 255, "n_bolas": 1, "circles": [{"cx": 25, "cy": 155, "r": 9}]}
