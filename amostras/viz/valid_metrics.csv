@@ -1,9 +1,0 @@
-file,iou,border_cut,steps,pred_cx,pred_cy,pred_r
-images/single/single_0273.png,0.000000,0.000000,20,127,127,24
-images/single/single_0201.png,0.000000,0.000000,20,127,127,24
-images/single/single_0161.png,0.025942,0.194444,20,127,127,24
-images/single/single_0043.png,0.388487,0.441667,20,126,126,25
-images/single/single_0217.png,0.000000,0.000000,20,127,127,24
-images/single/single_0145.png,0.000000,0.000000,20,127,127,24
-images/single/single_0190.png,0.110360,0.369444,20,127,127,24
-images/single/single_0220.png,0.000000,0.000000,20,127,127,24
