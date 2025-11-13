@@ -175,7 +175,8 @@ SHRINK_CAP_FAR_PX    = 14
 ALLOW_PARTIAL_CIRCLE = True
 
 # Raio máximo (diagonal do canvas é um limite tranquilo)
-R_EXT_MAX = int(math.ceil(math.hypot(IMG_SIZE, IMG_SIZE)))  # ~360 para 255x255
+# R_EXT_MAX = int(math.ceil(math.hypot(IMG_SIZE, IMG_SIZE)))  # ~360 para 255x255
+R_EXT_MAX = 40
 
 import os as _os
 EARLY_STOP = False
