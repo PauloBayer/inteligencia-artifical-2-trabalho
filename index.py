@@ -50,7 +50,7 @@ PERFECT_THICKNESS    = 1      # Espessura (em amostragens de anel) usada na aval
 # Parada por IoU de máscara (robusta a aliasing de borda) ---
 # IoU (Intersection over Union) entre o círculo rasterizado e a máscara de pixels pretos.
 MASK_IOU_STOP_ENABLE = True
-MASK_IOU_STOP_THR    = 0.985   # Parar quando a concordância com a máscara for >= 98.5%
+MASK_IOU_STOP_THR    = 0.940   # Parar quando a concordância com a máscara for >= 98.5%
 
 # --- Flags de overlay em GIF ---
 SHOW_GT_IN_GIF       = True   # Desenha círculo do ground truth (GT) no GIF, se disponível
@@ -98,7 +98,7 @@ MOMENTUM_DAMP_ON_MODE_CHANGE = 0.25  # Amortece momento quando troca de "modo" (
 # --- Heurísticas mínimas para o sinal do raio (só o sinal, já que a magnitude vem da RNA) ---
 # Observa anéis imediatamente fora/dentro da borda para decidir expandir/contrair.
 EPS_OUTER_EXPAND = 0.02  # >2% preto no anel externo sugere expandir (estamos cortando a borda)
-EPS_INNER_SHRINK = 0.40  # anel interno <40% preto (e interior com preto) sugere encolher
+EPS_INNER_SHRINK = 0.4  # anel interno <40% preto (e interior com preto) sugere encolher
 
 # --- Tetos de variação de raio dependentes da distância ---
 RAD_CAP_NEAR_PX = 1   # Quando “perto” da borda, mudar pouco o raio (evita passa-passa)
@@ -167,7 +167,7 @@ ELITE_COUNT     = 2
 # se o anel interno indica “estamos grandes demais”, multiplicar o passo
 # de encolhimento para convergir mais ágil, com tetos por proximidade.
 SHRINK_GAIN_MIN      = 1.25
-SHRINK_GAIN_MAX      = 3.0
+SHRINK_GAIN_MAX      = 4.0
 SHRINK_CAP_NEAR_PX   = 8
 SHRINK_CAP_FAR_PX    = 14
 
@@ -195,7 +195,7 @@ PATIENCE_STEPS    = _p["PATIENCE_STEPS"]
 EXTRA_STEPS_CAP   = _p["EXTRA_STEPS_CAP"]
 
 # No modo com traço (trace/GIF), deixamos vagar mais (mais passos) por padrão
-INFER_STEPS_MULT = int(_os.getenv("NN_INFER_MULT", "3"))
+INFER_STEPS_MULT = int(_os.getenv("NN_INFER_MULT", "5"))
 
 # ============================================================
 # 1.2) Inicialização / decodificação / movimento
@@ -1154,23 +1154,32 @@ def run_controller(nn, img255, img_small_bin, steps, cos_tab, sin_tab, metrics_l
         cap_px = RAD_CAP_NEAR_PX if near else RAD_CAP_FAR_PX
 
         if not white_growth_done:
-            if outer_b > EPS_OUTER_EXPAND:
-                # Expandir quando há preto fora (estamos cortando borda)
-                rad_mag = max(RAD_STEP_FLOOR_PX, int(round(abs(rad_step_nn))))
-                delta_r = +min(rad_mag, cap_px)  # só magnitude vem da RNA, sinal é heurístico
-                if ALLOW_PARTIAL_CIRCLE:
-                    cx, cy, r = apply_radius_recenter_partial(size, cx, cy, r, delta_r)
-                else:
-                    cx, cy, r = apply_radius_recenter(size, cx, cy, r, delta_r)
-            elif interior_black and (inner_b < EPS_INNER_SHRINK):
-                # Encolher quando anel interno está “claro demais”
+            # [PRIORIDADE 1: SHRINK]
+            # Se o anel interno está muito branco (inner_b baixo), é um sinal forte
+            # de que o círculo é grande demais (ex: cobrindo duas bolas).
+            # Isso DEVE ter prioridade sobre a expansão.
+            if interior_black and (inner_b < EPS_INNER_SHRINK):
                 delta_r = compute_shrink_delta(rad_step_nn, inner_b, near)
                 if delta_r < 0:
                     delta_r = -min(abs(delta_r), cap_px)
+                
                 if ALLOW_PARTIAL_CIRCLE:
                     cx, cy, r = apply_radius_partial(size, cx, cy, r, delta_r)
                 else:
                     cx, cy, r = apply_radius(size, cx, cy, r, delta_r)
+                mode_r = "shrink_nn" # Seta o modo de raio
+
+            # [PRIORIDADE 2: EXPAND]
+            # Só expande se a condição de shrink NÃO foi atendida.
+            elif outer_b > EPS_OUTER_EXPAND: 
+                rad_mag = max(RAD_STEP_FLOOR_PX, int(round(abs(rad_step_nn))))
+                delta_r = +min(rad_mag, cap_px)
+                
+                if ALLOW_PARTIAL_CIRCLE:
+                    cx, cy, r = apply_radius_recenter_partial(size, cx, cy, r, delta_r)
+                else:
+                    cx, cy, r = apply_radius_recenter(size, cx, cy, r, delta_r)
+                mode_r = "expand_nn"
 
         # 5) Reforça limites
         if ALLOW_PARTIAL_CIRCLE:
@@ -1223,7 +1232,8 @@ def run_controller(nn, img255, img_small_bin, steps, cos_tab, sin_tab, metrics_l
 # ============================================================
 # 10) Controlador com tracing (gera GIF, persegue IoU, etc.)
 # ============================================================
-def run_controller_trace(nn, img255, img_small_bin, steps, cos_tab, sin_tab, metrics_loss_fn, gt_tuple=None):
+def run_controller_trace(nn, img255, img_small_bin, steps, cos_tab, sin_tab, metrics_loss_fn, gt_tuple=None,
+                         cx_start=None, cy_start=None, r_start=None):
     """
     Versão detalhada com rastreamento de cada passo:
     - Loga (t, cx, cy, r, loss, modo);
@@ -1232,8 +1242,16 @@ def run_controller_trace(nn, img255, img_small_bin, steps, cos_tab, sin_tab, met
     Retorna (trace, best_dict).
     """
     size = img255.shape[0]
-    cx, cy, r = choose_initial_state(nn, img255, img_small_bin, size, rng,
-                                     policy=INIT_POLICY, use_init_head=USE_INIT_HEAD)
+    
+    if cx_start is not None and cy_start is not None and r_start is not None:
+        cx, cy, r = cx_start, cy_start, r_start
+        if ALLOW_PARTIAL_CIRCLE:
+            cx, cy, r = enforce_bounds_partial(size, cx, cy, r)
+        else:
+            cx, cy, r = enforce_bounds(size, cx, cy, r)
+    else:
+        cx, cy, r = choose_initial_state(nn, img255, img_small_bin, size, rng,
+                                         policy=INIT_POLICY, use_init_head=USE_INIT_HEAD)
 
     trace = []
     trace.append({"t": -2, "cx": int(cx), "cy": int(cy), "r": int(r),
@@ -1399,15 +1417,8 @@ def run_controller_trace(nn, img255, img_small_bin, steps, cos_tab, sin_tab, met
         cap_px = RAD_CAP_NEAR_PX if near else RAD_CAP_FAR_PX
 
         if not white_growth_done:
-            if outer_b > EPS_OUTER_EXPAND:
-                rad_mag = max(RAD_STEP_FLOOR_PX, int(round(abs(rad_step_nn))))
-                delta_r = +min(rad_mag, cap_px)
-                if ALLOW_PARTIAL_CIRCLE:
-                    cx, cy, r = apply_radius_recenter_partial(size, cx, cy, r, delta_r)
-                else:
-                    cx, cy, r = apply_radius_recenter(size, cx, cy, r, delta_r)
-                mode_r = "expand_nn"
-            elif interior_black and (inner_b < EPS_INNER_SHRINK):
+            # [PRIORIDADE 1: SHRINK]
+            if interior_black and (inner_b < EPS_INNER_SHRINK):
                 delta_r = compute_shrink_delta(rad_step_nn, inner_b, near)
                 if delta_r < 0:
                     delta_r = -min(abs(delta_r), cap_px)
@@ -1415,6 +1426,15 @@ def run_controller_trace(nn, img255, img_small_bin, steps, cos_tab, sin_tab, met
                     cx, cy, r = apply_radius_partial(size, cx, cy, r, delta_r)
                 else:
                     cx, cy, r = apply_radius(size, cx, cy, r, delta_r)
+            
+            # [PRIORIDADE 2: EXPAND]
+            elif outer_b > EPS_OUTER_EXPAND:
+                rad_mag = max(RAD_STEP_FLOOR_PX, int(round(abs(rad_step_nn))))
+                delta_r = +min(rad_mag, cap_px) 
+                if ALLOW_PARTIAL_CIRCLE:
+                    cx, cy, r = apply_radius_recenter_partial(size, cx, cy, r, delta_r)
+                else:
+                    cx, cy, r = apply_radius_recenter(size, cx, cy, r, delta_r)
 
         if ALLOW_PARTIAL_CIRCLE:
             cx, cy, r = enforce_bounds_partial(size, cx, cy, r)
@@ -1425,6 +1445,18 @@ def run_controller_trace(nn, img255, img_small_bin, steps, cos_tab, sin_tab, met
         #  podem ser inseridas aqui se precisarmos)
 
         l = metrics_loss_fn(cx, cy, r)
+
+        current_iou = 0.0
+        if MASK_IOU_STOP_ENABLE:
+            current_iou = iou_circle_vs_mask(img255, cx, cy, r, thr=BLACK_THR)
+            
+        if MASK_IOU_STOP_ENABLE and current_iou >= MASK_IOU_STOP_THR:
+            mode_final = "mask_iou_stop"
+            trace.append({"t": t, "cx": int(cx), "cy": int(cy), "r": int(r),
+                          "loss": float(l), "mode": mode_final})
+            if (l + IMPROVE_EPS) < best_loss: best_loss = l
+            break
+
         trace.append({"t": t, "cx": int(cx), "cy": int(cy), "r": int(r),
                       "loss": float(l), "mode": mode if mode_r is None else mode_r})
 
@@ -1457,7 +1489,7 @@ def run_controller_trace(nn, img255, img_small_bin, steps, cos_tab, sin_tab, met
     # Snap refine final (melhora local via IoU máscara)
     (snap_cx, snap_cy, snap_r), _ = snap_refine_mask_iou(
         img255, best["cx"], best["cy"], best["r"],
-        dxy=1, dr=2, thr=BLACK_THR, prefer_smaller_radius=True
+        dxy=1, dr=8, thr=BLACK_THR, prefer_smaller_radius=True
     )
 
     if (snap_cx, snap_cy, snap_r) != (best["cx"], best["cy"], best["r"]):
@@ -1740,6 +1772,7 @@ gif_count = 0
 MAX_BALLS = 6          # Limite máximo de bolas a buscar por imagem
 STOP_LOSS_THR = 1.5    # Parada heurística: se a loss for muito alta, para a busca
 MIN_BLACK_PIXELS = 10  # Mínimo de pixels pretos para continuar buscando
+MIN_ACCEPTED_FILL = 0.85
 
 for ann in annotations:
     file_rel = ann["file"]
@@ -1755,7 +1788,7 @@ for ann in annotations:
     cache_coarse = {}
     cache_fine   = {}
     coarse_weights = (0.7, 1.0, 0.9, 0.05)
-    fine_weights   = (0.8, 1.1, 1.0, 0.10)
+    fine_weights   = (5.0, 1.5, 1.0, 5.0)
 
     metrics_loss_coarse = make_metrics_loss(
         img_full, COS_COARSE, SIN_COARSE, cache_coarse, probe_list_coarse,
@@ -1864,13 +1897,24 @@ for ann in annotations:
         # 2. Prepara a entrada da RNA com a imagem mascarada (usando a nova função)
         current_img_small = array_to_image_small_bin(current_img_full, out_size=IN_SIZE)
         
+        size = current_img_full.shape[0]
+        ys, xs = np.where(current_img_full <= BLACK_THR)
+        
+        if xs.size > 0:
+            cx_start = int(np.clip(int(np.rint(xs.mean())), 0, size - 1))
+            cy_start = int(np.clip(int(np.rint(ys.mean())), 0, size - 1))
+            r_start  = max(1, INIT_RANDOM_R_MIN_PX) 
+        else:
+            break
+        
         # 3. Executa o controlador (busca a melhor bola remanescente)
         trace, best = run_controller_trace(
             nn, current_img_full, current_img_small,
             steps=int(steps_fine * max(1, INFER_STEPS_MULT)),
             cos_tab=COS_FINE, sin_tab=SIN_FINE,
             metrics_loss_fn=metrics_loss_fine,
-            gt_tuple=(x_real, y_real, r_real)
+            gt_tuple=(x_real, y_real, r_real),
+            cx_start=cx_start, cy_start=cy_start, r_start=r_start 
         )
         
         final_loss = float(best["loss"])
@@ -1879,6 +1923,12 @@ for ann in annotations:
         # 4. Critério de Aceitação/Parada
         if final_loss > STOP_LOSS_THR:
             print(f"  [STOP] Loss final ({final_loss:.4f}) acima do limite {STOP_LOSS_THR:.2f}. Assumindo ruído.")
+            break
+
+        final_fill = interior_fill_fraction(current_img_full, cx_pred, cy_pred, r_pred)
+
+        if final_fill < MIN_ACCEPTED_FILL:
+            print(f"  [STOP] Fill final ({final_fill:.4f}) abaixo do limite {MIN_ACCEPTED_FILL:.2f}. Rejeitando (sobra/ruído).")
             break
             
         if MAKE_GIFS and (GIF_LIMIT is None or gif_count < GIF_LIMIT):
