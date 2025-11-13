@@ -1736,8 +1736,8 @@ logf = open(RUN_JSONL_PATH, 'w', encoding='utf-8')
 gif_count = 0
 
 # Definições para a busca sequencial
-MAX_BALLS = 5          # Limite máximo de bolas a buscar por imagem
-STOP_LOSS_THR = 1.0    # Parada heurística: se a loss for muito alta, para a busca
+MAX_BALLS = 6          # Limite máximo de bolas a buscar por imagem
+STOP_LOSS_THR = 1.5    # Parada heurística: se a loss for muito alta, para a busca
 MIN_BLACK_PIXELS = 10  # Mínimo de pixels pretos para continuar buscando
 
 for ann in annotations:
@@ -1850,9 +1850,9 @@ for ann in annotations:
     
     current_img_full = img_full.copy()
     balls_found = []
-    
+
     print(f"\n--- Iniciando busca sequencial para {file_rel} ---")
-    
+
     while check_for_black(current_img_full) and len(balls_found) < MAX_BALLS:
         
         # 1. Verifica se ainda há pixels pretos suficientes para justificar a busca
@@ -1869,7 +1869,7 @@ for ann in annotations:
             steps=int(steps_fine * max(1, INFER_STEPS_MULT)),
             cos_tab=COS_FINE, sin_tab=SIN_FINE,
             metrics_loss_fn=metrics_loss_fine,
-            gt_tuple=(x_real, y_real, r_real) # GT é mantido apenas para referência visual/log
+            gt_tuple=(x_real, y_real, r_real)
         )
         
         final_loss = float(best["loss"])
@@ -1880,6 +1880,13 @@ for ann in annotations:
             print(f"  [STOP] Loss final ({final_loss:.4f}) acima do limite {STOP_LOSS_THR:.2f}. Assumindo ruído.")
             break
             
+        if MAKE_GIFS and (GIF_LIMIT is None or gif_count < GIF_LIMIT):
+            safe_name = file_rel.replace("/", "__")
+            gif_path = os.path.join(GIFS_DIR, f"{os.path.splitext(safe_name)[0]}_ball_{len(balls_found) + 1}_{RUN_ID}.gif")
+            save_gif_for_trace(current_img_full, trace, (x_real, y_real, r_real), gif_path) 
+            gif_count += 1
+            print(f"  [gif] salvo para Bola {len(balls_found) + 1} (mascarada): {gif_path}")
+            
         # 5. Mascaramento e Armazenamento
         
         # Apaga a bola encontrada da imagem para o próximo loop
@@ -1887,16 +1894,6 @@ for ann in annotations:
         
         # Armazena a predição
         balls_found.append({"x": cx_pred, "y": cy_pred, "r": r_pred, "loss": final_loss})
-
-        # Opcional: Geração de GIF para esta bola (se ativado e dentro do limite)
-        if MAKE_GIFS and (GIF_LIMIT is None or gif_count < GIF_LIMIT):
-            safe_name = file_rel.replace("/", "__")
-            gif_path = os.path.join(GIFS_DIR, f"{os.path.splitext(safe_name)[0]}_ball_{len(balls_found)}_{RUN_ID}.gif")
-            # Salva o trace apenas da busca por esta bola
-            # Nota: O GT original (x_real, y_real, r_real) será desenhado no GIF
-            save_gif_for_trace(img_full, trace, (x_real, y_real, r_real), gif_path) 
-            gif_count += 1
-            print(f"  [gif] salvo para Bola {len(balls_found)}: {gif_path}")
         
     # ============================================================
     # 16) LOGS E SUMÁRIO (ADAPTADO)
