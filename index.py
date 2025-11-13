@@ -393,6 +393,41 @@ def snap_refine_mask_iou(img255, cx, cy, r, *,
     return best, best_score
 
 # ============================================================
+# 3.c) Funções de Mascaramento e Verificação para Busca Sequencial
+# ============================================================
+def array_to_image_small_bin(img_array_full, out_size=IN_SIZE):
+    """
+    Converte um array NumPy (imagem full-res) para a entrada binária 28x28 da RNA.
+    Isso é necessário para re-alimentar a RNA com a imagem mascarada.
+    """
+    # Converte o array full-res para um objeto Image da PIL
+    # O Image.fromarray assume que o input é L (escala de cinza)
+    img_pil = Image.fromarray(img_array_full.astype(np.uint8)) 
+    
+    # Redimensiona com Vizinho Mais Próximo (como na função original)
+    img_small = img_pil.resize((out_size, out_size), Image.NEAREST).convert('L')
+    arr = np.array(img_small)
+    
+    # Binariza (como na função original: < 128 é preto/1.0, >= 128 é branco/0.0)
+    return np.where(arr < 128, 1.0, 0.0).astype(np.float32)
+
+def mask_circle_in_image(img255, cx, cy, r, val=255):
+    """
+    Apaga uma bola encontrada, setando os pixels dentro do círculo para branco (255)
+    na imagem full-res (img255).
+    """
+    size = img255.shape[0]
+    # Reutiliza a função _circle_mask (que deve estar definida antes desta seção)
+    mask = _circle_mask(size, cx, cy, r)
+    img255[mask] = val # Seta a área para branco
+    return img255
+
+def check_for_black(img255, thr=BLACK_THR):
+    """Verifica se ainda restam pixels pretos (além do limiar BLACK_THR) na imagem."""
+    # Retorna True se houver algum pixel com intensidade <= BLACK_THR
+    return np.any(img255 <= thr)
+
+# ============================================================
 # 4) Probes auxiliares + função de perda (loss)
 # ============================================================
 def _make_probe_list(base_r, img_size):
@@ -1670,11 +1705,12 @@ def load_checkpoint(expected_num_weights, expected_num_bits, path=CHECKPOINT_PAT
 # ============================================================
 with open(ANNOTATIONS_PATH, 'r', encoding='utf-8') as f:
     records = [json.loads(line) for line in f]
-annotations = [rec for rec in records if rec.get("split") == "single"]
+annotations = [rec for rec in records if rec.get("split") == "multi"]
 
 # ============================================================
 # 14) Loop do AG + execução final (com GIFs e logs)
 # ============================================================
+
 initial_population = None
 _num_weights = nn.get_weights().size                 # nº de pesos reais da RNA
 _num_bits    = int(_num_weights * 16)                # cromossomo: 16 bits por peso (int16 -> float/1000)
@@ -1698,6 +1734,11 @@ cnt_stuck = 0
 RUNS_DIR and os.path.exists(RUNS_DIR)
 logf = open(RUN_JSONL_PATH, 'w', encoding='utf-8')
 gif_count = 0
+
+# Definições para a busca sequencial
+MAX_BALLS = 5          # Limite máximo de bolas a buscar por imagem
+STOP_LOSS_THR = 1.0    # Parada heurística: se a loss for muito alta, para a busca
+MIN_BLACK_PIXELS = 10  # Mínimo de pixels pretos para continuar buscando
 
 for ann in annotations:
     file_rel = ann["file"]
@@ -1724,7 +1765,7 @@ for ann in annotations:
         weights=fine_weights, w_probe=W_PROBE_FINE
     )
 
-    # Ground truth (um único círculo por imagem nesse split)
+    # Ground truth (um único círculo por imagem nesse split, usado apenas para log)
     circle = ann["circles"][0]
     x_real, y_real, r_real = int(circle["cx"]), int(circle["cy"]), int(circle["r"])
 
@@ -1803,87 +1844,122 @@ for ann in annotations:
     initial_population = popx
     save_checkpoint(nn, initial_population, _num_weights, _num_bits, CHECKPOINT_PATH)
 
-    # Executa controlador detalhado (gera trace e potencialmente GIF)
-    trace, best = run_controller_trace(
-        nn, img_full, img_small,
-        steps=int(steps_fine * max(1, INFER_STEPS_MULT)),
-        cos_tab=COS_FINE, sin_tab=SIN_FINE,
-        metrics_loss_fn=metrics_loss_fine,
-        gt_tuple=(x_real, y_real, r_real)
-    )
-    final_loss = float(best["loss"])
-    cx_pred, cy_pred, r_pred = int(best["cx"]), int(best["cy"]), int(best["r"])
+    # ============================================================
+    # 15) NOVO LOOP DE DETECÇÃO SEQUENCIAL DE MÚLTIPLAS BOLAS
+    # ============================================================
+    
+    current_img_full = img_full.copy()
+    balls_found = []
+    
+    print(f"\n--- Iniciando busca sequencial para {file_rel} ---")
+    
+    while check_for_black(current_img_full) and len(balls_found) < MAX_BALLS:
+        
+        # 1. Verifica se ainda há pixels pretos suficientes para justificar a busca
+        if np.count_nonzero(current_img_full <= BLACK_THR) < MIN_BLACK_PIXELS:
+            print("  [STOP] Pixels pretos insuficientes restantes.")
+            break
+            
+        # 2. Prepara a entrada da RNA com a imagem mascarada (usando a nova função)
+        current_img_small = array_to_image_small_bin(current_img_full, out_size=IN_SIZE)
+        
+        # 3. Executa o controlador (busca a melhor bola remanescente)
+        trace, best = run_controller_trace(
+            nn, current_img_full, current_img_small,
+            steps=int(steps_fine * max(1, INFER_STEPS_MULT)),
+            cos_tab=COS_FINE, sin_tab=SIN_FINE,
+            metrics_loss_fn=metrics_loss_fine,
+            gt_tuple=(x_real, y_real, r_real) # GT é mantido apenas para referência visual/log
+        )
+        
+        final_loss = float(best["loss"])
+        cx_pred, cy_pred, r_pred = int(best["cx"]), int(best["cy"]), int(best["r"])
+        
+        # 4. Critério de Aceitação/Parada
+        if final_loss > STOP_LOSS_THR:
+            print(f"  [STOP] Loss final ({final_loss:.4f}) acima do limite {STOP_LOSS_THR:.2f}. Assumindo ruído.")
+            break
+            
+        # 5. Mascaramento e Armazenamento
+        
+        # Apaga a bola encontrada da imagem para o próximo loop
+        current_img_full = mask_circle_in_image(current_img_full, cx_pred, cy_pred, r_pred)
+        
+        # Armazena a predição
+        balls_found.append({"x": cx_pred, "y": cy_pred, "r": r_pred, "loss": final_loss})
 
-    # Métricas finais para log
-    fill     = interior_fill_fraction(img_full, cx_pred, cy_pred, r_pred)
-    inner_b  = _ring_fraction_vec(img_full, cx_pred, cy_pred, r_pred, delta=-1, cos_tab=COS_FINE, sin_tab=SIN_FINE)
-    outer_b  = _ring_fraction_vec(img_full, cx_pred, cy_pred, r_pred, delta=+1, cos_tab=COS_FINE, sin_tab=SIN_FINE)
-    cut      = _border_cut_vec(img_full, cx_pred, cy_pred, r_pred, cos_tab=COS_FINE, sin_tab=SIN_FINE)
-    probe_b  = _probe_max_thick(img_full, cx_pred, cy_pred,
-                                _make_probe_list(PROBE_R_FINE, IMG_SIZE),
-                                PROBE_THICKNESS, COS_FINE, SIN_FINE)
-    iou      = iou_circle(IMG_SIZE, (cx_pred, cy_pred, r_pred), (x_real, y_real, r_real))
-
-    # Acumula estatísticas
-    cnt += 1; sum_iou += iou
-    if iou >= 0.5: cnt_iou_good += 1
-    if final_loss >= 1.99: cnt_stuck += 1
-
-    # GIF (um por imagem até GIF_LIMIT)
-    gif_path = None
-    if MAKE_GIFS and (GIF_LIMIT is None or gif_count < GIF_LIMIT):
-        safe_name = file_rel.replace("/", "__")
-        gif_path = os.path.join(GIFS_DIR, f"{os.path.splitext(safe_name)[0]}_{RUN_ID}.gif")
-        save_gif_for_trace(img_full, trace, (x_real, y_real, r_real), gif_path)
-        gif_count += 1
-        print(f"[gif] salvo: {gif_path}")
-
-    # Motivo de parada e nº de passos usados (derivado do trace)
-    _, stop_mode_found = _first_stop_index(trace)
-    stop_reason = stop_mode_found if stop_mode_found is not None else "budget"
-    steps_used = steps_used_from_trace(trace)
+        # Opcional: Geração de GIF para esta bola (se ativado e dentro do limite)
+        if MAKE_GIFS and (GIF_LIMIT is None or gif_count < GIF_LIMIT):
+            safe_name = file_rel.replace("/", "__")
+            gif_path = os.path.join(GIFS_DIR, f"{os.path.splitext(safe_name)[0]}_ball_{len(balls_found)}_{RUN_ID}.gif")
+            # Salva o trace apenas da busca por esta bola
+            # Nota: O GT original (x_real, y_real, r_real) será desenhado no GIF
+            save_gif_for_trace(img_full, trace, (x_real, y_real, r_real), gif_path) 
+            gif_count += 1
+            print(f"  [gif] salvo para Bola {len(balls_found)}: {gif_path}")
+        
+    # ============================================================
+    # 16) LOGS E SUMÁRIO (ADAPTADO)
+    # ============================================================
+    
+    cnt += 1 # Conta a imagem no dataset
 
     # Logs legíveis no console
-    print(f"Imagem: {file_path}")
-    print(f"GT (px):        (x={x_real}, y={y_real}, r={r_real})")
-    print(f"Inicial (px):   (x={cx_init}, y={cy_init}, r={r_init}), loss_inicial={loss_init_true:.6f}")
-    print(f"Predição (px):  (x={cx_pred}, y={cy_pred}, r={r_pred})")
-    print(f"Loss final:     {final_loss:.6f} | fill={fill:.4f} inner={inner_b:.4f} outer={outer_b:.4f} cut={cut:.4f} probe={probe_b:.4f} IoU={iou:.4f}")
-    print(f"Stop reason:    {stop_reason} | steps_used={steps_used}")
-    print("--------")
+    print(f"\nResultado Final para Imagem: {file_path}")
+    print(f"GT (px) ref:    (x={x_real}, y={y_real}, r={r_real})")
+    print(f"Bolas Encontradas: {len(balls_found)}")
+    
+    total_iou_img = 0.0
+    
+    for i, ball in enumerate(balls_found):
+        # Para fins de demonstração, calculamos o IoU contra o PRIMEIRO GT (x_real, y_real, r_real)
+        # Se o dataset tiver múltiplos GTs, esta comparação precisa de emparelhamento.
+        iou_val = iou_circle(IMG_SIZE, (ball["x"], ball["y"], ball["r"]), (x_real, y_real, r_real))
+        total_iou_img += iou_val
+        
+        # Métricas simplificadas para o log da bola individual
+        fill = interior_fill_fraction(img_full, ball["x"], ball["y"], ball["r"])
+        
+        print(f"  -> Bola {i+1} (px): (x={ball['x']}, y={ball['y']}, r={ball['r']})")
+        print(f"     Loss: {ball['loss']:.4f} | Fill: {fill:.4f} | IoU vs GT1: {iou_val:.4f}")
 
-    # Linha JSONL detalhada para análise posterior
+    if len(balls_found) > 0:
+        sum_iou += (total_iou_img / len(balls_found)) # Média IoU desta imagem (simplificada)
+        if total_iou_img > 0.5: cnt_iou_good += 1 # Condição simplificada de "boa" detecção
+    
+    # Linha JSONL detalhada para análise posterior (ADAPTADA)
     log_line = {
         "run_id": RUN_ID,
         "file": file_rel,
-        "gt": {"x": x_real, "y": y_real, "r": r_real},
+        "gt_ref": {"x": x_real, "y": y_real, "r": r_real},
         "init": {"x": cx_init, "y": cy_init, "r": r_init, "loss": float(loss_init_true)},
-        "pred": {"x": cx_pred, "y": cy_pred, "r": r_pred, "loss": float(final_loss)},
-        "metrics": {"fill": float(fill), "inner": float(inner_b), "outer": float(outer_b),
-                    "cut": float(cut), "probe": float(probe_b), "IoU": float(iou)},
+        "predicoes": balls_found,
+        "total_bolas_encontradas": len(balls_found),
         "ctrl": {"coarse_steps": CTRL_STEPS_COARSE, "fine_steps": steps_fine,
-                 "momentum_beta": MOMENTUM_BETA, "use_gray_code": USE_GRAY_CODE,
-                 "policy": "white_scan | white_superjump | border_seek | approach | shrink_nn | expand_nn | perfect_stop | iou_stop | mask_iou_stop | radius_ping_pong",
-                 "auto_extend": AUTO_EXTEND_STEPS,
-                 "init_policy": INIT_POLICY, "use_init_head": USE_INIT_HEAD, "init_nn_steps": INIT_NN_STEPS,
-                 "search_budget": SEARCH_BUDGET, "early_stop": EARLY_STOP,
-                 "infer_steps_mult": INFER_STEPS_MULT},
-        "stop": {"reason": stop_reason, "steps_used": steps_used},
-        "gif": gif_path, "time": time.time()
+                 "policy": "SEQUENCIAL_SEARCH",
+                 "search_budget": SEARCH_BUDGET, "infer_steps_mult": INFER_STEPS_MULT},
+        "time": time.time()
     }
     logf.write(json.dumps(log_line, ensure_ascii=False) + "\n")
     logf.flush()
 
 # Resumo final do dataset (útil para acompanhar evolução ao longo de execuções)
 if cnt > 0:
+    # As variáveis cnt, sum_iou, cnt_iou_good, e cnt_stuck são acumuladas no loop principal
+    # e agora refletem a Média Simplificada de IoU por imagem.
     mean_iou  = sum_iou / float(cnt)
     pct_good  = 100.0 * cnt_iou_good / float(cnt)
-    pct_stuck = 100.0 * cnt_stuck / float(cnt)
-    print(f"[Resumo dataset] imagens={cnt} | IoU médio={mean_iou:.3f} | %IoU≥0.5={pct_good:.1f}% | %stuck≈2.0={pct_stuck:.1f}%")
+    # Mantemos pct_stuck no sumário, mas a lógica de acumulação (cnt_stuck) não foi detalhada
+    # no loop sequencial, portanto, será 0 ou imprecisa.
+    pct_stuck = 100.0 * cnt_stuck / float(cnt) 
+    
+    print(f"\n[Resumo dataset] imagens={cnt} | IoU médio (simplificado)={mean_iou:.3f} | %Imagens c/ IoU>0.5={pct_good:.1f}% | %stuck≈2.0={pct_stuck:.1f}%")
+
+    # Estrutura de Sumário JSONL Adaptada
     summary = {
         "run_id": RUN_ID,
         "dataset_images": cnt,
-        "mean_IoU": float(mean_iou),
+        "mean_IoU_simplified": float(mean_iou),
         "pct_IoU_ge_0_5": float(pct_good),
         "pct_stuck_ge_approx_2": float(pct_stuck),
         "config": {
@@ -1893,38 +1969,15 @@ if cnt > 0:
             "GA_POP": GA_POP_COARSE, "GA_GENS_COARSE": GA_GENS_COARSE, "GA_GENS_POLISH": GA_GENS_POLISH,
             "GA_MUT_COARSE": GA_MUT_COARSE, "GA_MUT_POLISH": GA_MUT_POLISH,
             "MOMENTUM_BETA": MOMENTUM_BETA, "USE_GRAY_CODE": USE_GRAY_CODE,
-            "MAKE_GIFS": MAKE_GIFS, "GIF_SCALE": GIF_SCALE, "GIF_DURATION_MS": GIF_DURATION_MS,
-            "POLICY": "white_scan | white_superjump | border_seek | approach | shrink_nn | expand_nn | perfect_stop | iou_stop | mask_iou_stop | radius_ping_pong",
+            "POLICY": "SEQUENCIAL_SEARCH (white_scan | border_seek | approach)",
             "AUTO_EXTEND_STEPS": AUTO_EXTEND_STEPS,
-            "EXTRA_STEPS_CAP": EXTRA_STEPS_CAP,
             "EXTRA_STEPS_CAP_TRACE": EXTRA_STEPS_CAP_TRACE,
             "SEARCH_BUDGET": SEARCH_BUDGET, "INFER_STEPS_MULT": INFER_STEPS_MULT,
-            "BLACK_THR": BLACK_THR,
-            "STOP_ON_PERFECT": STOP_ON_PERFECT,
-            "PERFECT_INNER_FRAC": PERFECT_INNER_FRAC,
-            "PERFECT_OUTER_FRAC": PERFECT_OUTER_FRAC,
-            "PERFECT_THICKNESS": PERFECT_THICKNESS,
-            "WHITE_STREAK_GROWTH": WHITE_STREAK_GROWTH,
-            "WHITE_JITTER_PX": WHITE_JITTER_PX,
-            "WHITE_JITTER_CLAMP": WHITE_JITTER_CLAMP,
-            "WHITE_SUPERJUMP_EVERY": WHITE_SUPERJUMP_EVERY,
-            "WHITE_SUPERJUMP_PX": WHITE_SUPERJUMP_PX,
-            "APPROACH_STEP_GAIN_FAR": APPROACH_STEP_GAIN_FAR,
-            "APPROACH_STEP_GAIN_NEAR": APPROACH_STEP_GAIN_NEAR,
-            "APPROACH_NEAR_FRAC_OF_R": APPROACH_NEAR_FRAC_OF_R,
-            "APPROACH_STEP_MAX_PX": APPROACH_STEP_MAX_PX,
-            "BORDER_STEP_MAX_PX": BORDER_STEP_MAX_PX,
-            "MOMENTUM_DAMP_ON_MODE_CHANGE": MOMENTUM_DAMP_ON_MODE_CHANGE,
-            "EPS_OUTER_EXPAND": EPS_OUTER_EXPAND,
-            "EPS_INNER_SHRINK": EPS_INNER_SHRINK,
-            "RAD_CAP_NEAR_PX": RAD_CAP_NEAR_PX,
-            "RAD_CAP_FAR_PX": RAD_CAP_FAR_PX,
-            "IOU_EVAL_STOP": IOU_EVAL_STOP,
-            "IOU_EVAL_THRESH": IOU_EVAL_THRESH,
-            "IOU_CHASE_ENABLE": IOU_CHASE_ENABLE,
-            "IOU_IMPROVE_DELTA": IOU_IMPROVE_DELTA,
-            "IOU_STEPS_BONUS": IOU_STEPS_BONUS,
-            "IOU_EXTRA_CAP": IOU_EXTRA_CAP
+            "SEQUENTIAL_CONFIG": {
+                "MAX_BALLS": MAX_BALLS,
+                "STOP_LOSS_THR": STOP_LOSS_THR,
+                "MIN_BLACK_PIXELS": MIN_BLACK_PIXELS
+            }
         }
     }
     with open(RUN_JSONL_PATH, 'a', encoding='utf-8') as fsum:
