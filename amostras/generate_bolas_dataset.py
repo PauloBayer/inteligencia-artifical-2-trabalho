@@ -8,7 +8,12 @@ As saídas vão ficar nas pastas:
 - dados/images/multi/*.png     (imagens com 2 ou mais bolas)
 - dados/annotations.jsonl      (um JSON por linha, com metadados)
 
-Uso:
+Uso (exemplos):
+  # Sem seed → dataset diferente a cada execução
+  python generate_bolas_dataset.py --out ./dados --single 100 --multi 100 \
+    --size 255 --r-min 8 --r-max 40 --k-min 2 --k-max 6 --allow-overlap
+
+  # Com seed fixa → dataset reprodutível
   python generate_bolas_dataset.py --out ./dados --single 100 --multi 100 \
     --size 255 --r-min 8 --r-max 40 --k-min 2 --k-max 6 --allow-overlap \
     --seed 42
@@ -112,7 +117,7 @@ def draw_circles_to_array(size: int, circles: List[Circle]) -> np.ndarray:
     Cria uma matriz (H, W) uint8 com fundo branco (255) e bolas pretas (0).
     Overlaps continuam pretos.
     """
-    img = np.full((size, size), 255, dtype=np.uint8)  # demorei, mas achei, fundo branco aqui
+    img = np.full((size, size), 255, dtype=np.uint8)  # fundo branco aqui
     if not circles:
         return img
     yy, xx = np.ogrid[:size, :size]
@@ -202,7 +207,7 @@ def best_match_iou(
         return 0.0, None
     cand_mask = _circle_interior_mask(size=size, circle=candidate)
     best_iou = 0.0
-    best_idx = None
+    best_idx: Optional[int] = None
     for idx, gt in enumerate(gt_circles):
         gt_mask = _circle_interior_mask(size=size, circle=gt)
         iou = iou_with_mask(cand_mask, gt_mask)
@@ -239,14 +244,20 @@ def build_dataset(
     k_max_multi: int,
     allow_overlap: bool,
     min_gap: float,
-    seed: int,
+    seed: Optional[int],
 ) -> None:
     out_dir = Path(out_dir)
     img_single_dir = out_dir / "images" / "single"
     img_multi_dir = out_dir / "images" / "multi"
     ann_path = out_dir / "annotations.jsonl"
 
-    rng = np.random.default_rng(seed)
+    # RNG com seed opcional:
+    # - seed is None  -> aleatório a cada execução
+    # - seed inteiro -> reprodutível
+    if seed is None:
+        rng = np.random.default_rng()
+    else:
+        rng = np.random.default_rng(seed)
 
     # Garante as pastas
     img_single_dir.mkdir(parents=True, exist_ok=True)
@@ -356,7 +367,12 @@ def parse_args() -> argparse.Namespace:
         default=0.0,
         help="Gap mínimo entre bordas quando overlap NÃO é permitido (pixels).",
     )
-    p.add_argument("--seed", type=int, default=42, help="Semente para reprodutibilidade.")
+    p.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="Semente para reprodutibilidade (None = aleatório a cada execução).",
+    )
     p.add_argument(
         "--demo-metrics",
         action="store_true",
